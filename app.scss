@@ -1,0 +1,66 @@
+$url : "images";
+
+body {
+    height: 100vh;
+    background-image: url("#{$url}/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* 스크롤 해도 background는 같이 움직이지 않음 */
+    background-attachment: fixed;
+}
+
+.container {
+    padding: 50px 0;
+    .heroes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 700px;
+        /* 블럭에 너비나 높이 지정되어 있을때 margin을 auto로 하면 가운데 정렬됨 */
+        margin: 0 auto;
+        padding: 40px 20px;
+        .hero {
+            width: 80px;
+            height: 84px;
+            margin: 4px;
+            border: 3px solid #fff;
+            border-radius: 10px;
+            /* box- sizeing은 보더 넣으면 더 커지는데 이거 하면 보더랑 박스랑 원래 사이즈로 돌림 */
+            box-sizing: border-box;
+            background-color: #555;
+            /* 컨텐트 안에 내용물이 넘치면 가리겟다는 의미 */
+            overflow: hidden;
+            transform: skewX(-14deg);
+            transition:
+                transform .1s,
+                background-color .6s;
+
+            &:hover {
+                background-color: #ff9c00;
+                transform: scale(1.3) skewX(-14deg);
+                z-index: 1;
+            }
+
+            .image {
+                width: 140%;
+                height: 100%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 90px;
+                transform: skewX(14deg) translateX(-16px);
+            }
+            // .hero
+            @for $i from 1 through 32{
+                &:nth-child(#{$i}) .image {background-image: url("#{$url}/hero#{$i}.png");}
+            }
+        }
+    }
+    .logo {
+        max-width: 300px;
+        margin: 0 auto;
+        padding: 0 20px;
+        img {
+            width: 100%;
+        }
+    }
+}
